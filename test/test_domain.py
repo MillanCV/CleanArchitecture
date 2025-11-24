@@ -47,14 +47,14 @@ class TestEmailValidation:
 
 class TestPasswordValidation:
     def test_valid_password(self):
-        valid_password = Password(password="password123")
+        valid_password = Password(value="password123")
 
         validated_password = validate_password("password123")
 
         assert valid_password == validated_password
 
     def test_valid_password_with_special_chars(self):
-        valid_password = Password(password="MyPass123!")
+        valid_password = Password(value="MyPass123!")
 
         validated_password = validate_password("MyPass123!")
 
