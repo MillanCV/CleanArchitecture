@@ -1,20 +1,44 @@
-import re
+"""Email Value Object.
 
+Represents an email address as an immutable value object.
+"""
+
+import re
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Email:
+    """Email value object.
+
+    Represents an email address with user and domain parts.
+    Immutable and compared by value.
+    """
+
     user: str
     domain: str
 
+    def __eq__(self, other):
+        if not isinstance(other, Email):
+            return False
+        return self.user == other.user and self.domain == other.domain
 
-@dataclass
-class Password:
-    value: str
+    def __hash__(self):
+        return hash((self.user, self.domain))
 
 
 def validate_email(email_address: str) -> Email:
+    """Validate and create an Email value object.
+
+    Args:
+        email_address: The email address string to validate.
+
+    Returns:
+        Email: A validated Email value object.
+
+    Raises:
+        ValueError: If the email address is invalid.
+    """
     EMAIL_PATTERN = re.compile(
         r"^(?P<local_part>[a-zA-Z0-9_.+-]+)@"
         r"(?P<domain>[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$"
@@ -66,39 +90,3 @@ def validate_email(email_address: str) -> Email:
         user=local_part,
         domain=domain,
     )
-
-
-def validate_password(password_value: str) -> Password:
-    if not isinstance(password_value, str):
-        raise ValueError("Password must be a string")
-
-    if len(password_value) < 8:
-        raise ValueError("Password must be at least 8 characters long")
-
-    contains_letter = any(char.isalpha() for char in password_value)
-    if not contains_letter:
-        raise ValueError("Password must contain at least one letter")
-
-    contains_number = any(char.isdigit() for char in password_value)
-    if not contains_number:
-        raise ValueError("Password must contain at least one number")
-
-    return Password(value=password_value)
-
-
-class User:
-    def __init__(
-        self,
-        name: str,
-        email: str,
-        password: str,
-    ):
-        self.name = name
-        self.email = self._validate_email(email)
-        self.password = self._validate_password(password)
-
-    def _validate_email(self, email_address: str) -> Email:
-        return validate_email(email_address)
-
-    def _validate_password(self, password_value: str) -> Password:
-        return validate_password(password_value)
