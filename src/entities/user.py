@@ -27,16 +27,35 @@ class User:
         """Initialize a User entity.
 
         Args:
-            name: The user's name.
+            name: The user's name (will be validated).
             email: The user's email address (will be validated).
             password: The user's password (will be validated).
             address: The user's address.
+
+        Raises:
+            ValueError: If name, email, or password is invalid.
         """
         self.id = str(uuid.uuid4())
-        self.name = name
+        self.name = self._validate_name(name)
         self.email = Email.from_string(email)
         self.password = Password.from_string(password)
         self.address = address
+
+    def _validate_name(self, name: str) -> str:
+        """Validate and normalize the user's name.
+
+        Args:
+            name: The name to validate.
+
+        Returns:
+            str: The normalized name (stripped).
+
+        Raises:
+            ValueError: If name is empty or contains only whitespace.
+        """
+        if not name or not name.strip():
+            raise ValueError("User name cannot be empty")
+        return name.strip()
 
     def __eq__(self, other):
         """Compare users by their ID."""

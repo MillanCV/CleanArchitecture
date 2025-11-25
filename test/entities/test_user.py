@@ -49,6 +49,39 @@ class TestUser:
                 address=valid_address,
             )
 
+    def test_create_user_with_empty_name(
+        self, valid_email_string, valid_password_string, valid_address
+    ):
+        with pytest.raises(ValueError, match="User name cannot be empty"):
+            User(
+                name="",
+                email=valid_email_string,
+                password=valid_password_string,
+                address=valid_address,
+            )
+
+    def test_create_user_with_whitespace_only_name(
+        self, valid_email_string, valid_password_string, valid_address
+    ):
+        with pytest.raises(ValueError, match="User name cannot be empty"):
+            User(
+                name="   ",
+                email=valid_email_string,
+                password=valid_password_string,
+                address=valid_address,
+            )
+
+    def test_create_user_name_strips_whitespace(
+        self, valid_email_string, valid_password_string, valid_address
+    ):
+        user = User(
+            name="  John Doe  ",
+            email=valid_email_string,
+            password=valid_password_string,
+            address=valid_address,
+        )
+        assert user.name == "John Doe"
+
     def test_users_with_same_id_are_equal(
         self, valid_email_string, valid_password_string, valid_address
     ):
