@@ -1,35 +1,13 @@
-"""Email Value Object.
-
-Represents an email address as an immutable value object.
-"""
-
 import re
 from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
 class Email:
-    """Email value object.
-
-    Represents an email address.
-    Compared by value.
-    """
-
     value: str
 
     @classmethod
     def from_string(cls, email_address: str) -> "Email":
-        """Create an Email value object from a string.
-
-        Args:
-            email_address: The email address string.
-
-        Returns:
-            Email: An Email value object.
-
-        Raises:
-            ValueError: If the email address is invalid.
-        """
         EMAIL_PATTERN = re.compile(
             r"^(?P<local_part>[a-zA-Z0-9_.+-]+)@"
             r"(?P<domain>[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$"

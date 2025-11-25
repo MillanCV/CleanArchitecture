@@ -1,38 +1,14 @@
-"""Address Value Object.
-
-Represents an address as an immutable value object.
-"""
-
 from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
 class Address:
-    """Address value object.
-
-    Represents an address with street, postal code, and city.
-    Compared by value.
-    """
-
     street_address: str
     postal_code: str
     city: str
 
     @classmethod
     def create(cls, street_address: str, postal_code: str, city: str) -> "Address":
-        """Create an Address value object.
-
-        Args:
-            street_address: The street address.
-            postal_code: The postal code.
-            city: The city.
-
-        Returns:
-            Address: An Address value object.
-
-        Raises:
-            ValueError: If any field is empty.
-        """
         street_address = street_address.strip()
         postal_code = postal_code.strip()
         city = city.strip()
