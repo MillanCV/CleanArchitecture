@@ -1,5 +1,7 @@
 """Tests for User Entity."""
 
+import uuid
+
 import pytest
 
 from src import User
@@ -85,19 +87,21 @@ class TestUser:
     def test_users_with_same_id_are_equal(
         self, valid_email_string, valid_password_string, valid_address
     ):
+        user_id = str(uuid.uuid4())
         user1 = User(
+            user_id=user_id,
             name="John Doe",
             email=valid_email_string,
             password=valid_password_string,
             address=valid_address,
         )
         user2 = User(
+            user_id=user_id,
             name="Jane Doe",
             email="jane.doe@example.com",
             password="DifferentPass123",
             address=valid_address,
         )
-        user2.id = user1.id
         assert user1 == user2
 
     def test_users_with_different_ids_are_not_equal(
