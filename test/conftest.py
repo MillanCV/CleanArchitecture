@@ -14,7 +14,7 @@ def valid_email_string():
 @pytest.fixture
 def valid_email_object():
     """Fixture for a valid Email value object."""
-    return Email(user="john.doe", domain="example.com")
+    return Email(value="john.doe@example.com")
 
 
 @pytest.fixture
