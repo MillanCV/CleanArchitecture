@@ -6,7 +6,7 @@ Represents an address as an immutable value object.
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Address:
     """Address value object.
 

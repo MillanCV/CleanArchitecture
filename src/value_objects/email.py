@@ -7,7 +7,7 @@ import re
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Email:
     """Email value object.
 

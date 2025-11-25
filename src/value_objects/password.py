@@ -6,7 +6,7 @@ Represents a password as an immutable value object.
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Password:
     """Password value object.
 
