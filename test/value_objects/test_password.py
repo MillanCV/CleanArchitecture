@@ -22,5 +22,3 @@ class TestPassword:
     def test_create_password_invalid(self, value):
         with pytest.raises(ValueError):
             Password.from_string(value)
-
-

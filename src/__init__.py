@@ -7,9 +7,10 @@ This package contains the domain layer with:
 """
 
 from src.entities import User
-from src.value_objects import Email, Password
+from src.value_objects import Address, Email, Password
 
 __all__ = [
+    "Address",
     "Email",
     "Password",
     "User",

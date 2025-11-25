@@ -2,7 +2,7 @@
 
 import pytest
 
-from src import Email, Password, User
+from src import Address, Email, Password, User
 
 
 @pytest.fixture
@@ -36,8 +36,21 @@ def user_name():
 
 
 @pytest.fixture
-def valid_user(user_name, valid_email_string, valid_password_string):
+def valid_address():
+    """Fixture for a valid Address value object."""
+    return Address.create(
+        street_address="Calle Principal 123",
+        postal_code="28001",
+        city="Madrid",
+    )
+
+
+@pytest.fixture
+def valid_user(user_name, valid_email_string, valid_password_string, valid_address):
     """Fixture for a valid User entity."""
     return User(
-        name=user_name, email=valid_email_string, password=valid_password_string
+        name=user_name,
+        email=valid_email_string,
+        password=valid_password_string,
+        address=valid_address,
     )
