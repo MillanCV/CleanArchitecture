@@ -1,5 +1,10 @@
+from src.service_locator import ServiceLocator
+
+
 def main():
-    print("Hello from curso!")
+    service_locator = ServiceLocator()
+
+    service_locator.view.run()
 
 
 if __name__ == "__main__":
