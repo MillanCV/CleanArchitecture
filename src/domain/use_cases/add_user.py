@@ -1,7 +1,7 @@
-from src.repositories.repository import UserRepository
-from src.dtos.user import UserData
-from src.entities import User
-from src.value_objects import Address
+from src.domain.repositories.repository import UserRepository
+from src.domain.use_cases.dtos.user import UserData
+from src.domain.entities import User
+from src.domain.value_objects import Address
 
 
 class AddUserUseCase:

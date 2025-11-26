@@ -6,8 +6,8 @@ This package contains the domain layer with:
 - Domain Services: Business logic validations
 """
 
-from src.entities import User
-from src.value_objects import Address, Email, Password
+from src.domain.entities import User
+from src.domain.value_objects import Address, Email, Password
 
 __all__ = [
     "Address",

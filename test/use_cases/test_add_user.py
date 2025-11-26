@@ -2,8 +2,8 @@
 
 import pytest
 
-from src.dtos.user import UserData
-from src.use_cases.add_user import AddUserUseCase
+from src.domain.use_cases.dtos.user import UserData
+from src.domain.use_cases.add_user import AddUserUseCase
 
 
 class TestAddUserUseCase:

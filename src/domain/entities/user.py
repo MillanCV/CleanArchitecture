@@ -1,8 +1,8 @@
 import uuid
 
-from src.value_objects.address import Address
-from src.value_objects.email import Email
-from src.value_objects.password import Password
+from src.domain.value_objects.address import Address
+from src.domain.value_objects.email import Email
+from src.domain.value_objects.password import Password
 
 
 class User:

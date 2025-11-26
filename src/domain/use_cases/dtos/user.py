@@ -9,3 +9,4 @@ class UserData:
     street_address: str
     postal_code: str
     city: str
+

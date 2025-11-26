@@ -1,5 +1,5 @@
-from src.repositories.repository import UserRepository
-from src.entities import User
+from src.domain.repositories.repository import UserRepository
+from src.domain.entities import User
 
 
 class ListUsersUseCase:

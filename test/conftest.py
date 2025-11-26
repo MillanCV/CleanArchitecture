@@ -3,7 +3,7 @@
 import pytest
 
 from src import Address, Email, Password, User
-from src.repositories.repository import UserRepository
+from src.domain.repositories.repository import UserRepository
 
 
 @pytest.fixture
