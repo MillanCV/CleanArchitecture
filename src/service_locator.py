@@ -2,7 +2,7 @@ from src.domain.repositories.repository import UserRepository
 from src.domain.use_cases.add_user import AddUserUseCase
 from src.domain.use_cases.list_users import ListUsersUseCase
 from src.infrastructure.sqlite_repository import SQLiteRepository
-from src.presentation.terminal.terminal_view import Terminal
+from src.presentation.api.api_view import ApiView
 from src.presentation.presenter import Presenter
 
 
@@ -12,7 +12,7 @@ class ServiceLocator:
         self._repository: UserRepository = SQLiteRepository()
 
         # View
-        self._view = Terminal()
+        self._view = ApiView()
 
         # Presenter
         self._presenter = Presenter(
