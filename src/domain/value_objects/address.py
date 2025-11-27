@@ -7,6 +7,9 @@ class Address:
     postal_code: str
     city: str
 
+    def __str__(self) -> str:
+        return f"{self.street_address}, {self.postal_code}, {self.city}"
+
     @classmethod
     def create(cls, street_address: str, postal_code: str, city: str) -> "Address":
         street_address = street_address.strip()

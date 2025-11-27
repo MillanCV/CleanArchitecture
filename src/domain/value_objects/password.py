@@ -5,6 +5,9 @@ from dataclasses import dataclass
 class Password:
     value: str
 
+    def __str__(self) -> str:
+        return self.value
+
     @classmethod
     def from_string(cls, password_value: str) -> "Password":
         if len(password_value) < 8:

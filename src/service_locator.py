@@ -8,12 +8,15 @@ from src.presentation.presenter import Presenter
 
 class ServiceLocator:
     def __init__(self):
-        self.repository: UserRepository = InMemoryRepository
+        # Repositories
+        self.repository: UserRepository = InMemoryRepository()
 
+        # View
         self.view = Terminal()
+
+        # Presenter
         self.presenter = Presenter(
             view=self.view,
             add_user_use_case=AddUserUseCase(self.repository),
             list_users_use_case=ListUsersUseCase(self.repository),
         )
-        self.view.presenter = self.presenter

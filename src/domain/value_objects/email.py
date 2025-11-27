@@ -6,6 +6,9 @@ from dataclasses import dataclass
 class Email:
     value: str
 
+    def __str__(self) -> str:
+        return self.value
+
     @classmethod
     def from_string(cls, email_address: str) -> "Email":
         EMAIL_PATTERN = re.compile(

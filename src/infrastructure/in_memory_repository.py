@@ -9,9 +9,9 @@ class InMemoryRepository(UserRepository):
         self._users: list[User] = []
 
     def save_user(self, user: User) -> User:
-        """Save a user to the fake repository."""
+        """Save a user to the f1ake repository."""
         self._users.append(user)
-        return user
+        return self._users[-1]
 
     def find_by_email(self, email: str) -> bool:
         """Check if an email exists in the repository."""

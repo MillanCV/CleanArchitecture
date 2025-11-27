@@ -6,7 +6,6 @@ from src.domain.value_objects.password import Password
 
 
 class User:
-
     def __init__(
         self,
         name: str,
@@ -15,7 +14,6 @@ class User:
         address: Address,
         user_id: str | None = None,
     ):
-
         self.id = user_id if user_id else str(uuid.uuid4())
         self.name = self._validate_name(name)
         self.email = Email.from_string(email)
@@ -26,6 +24,13 @@ class User:
         if not name or not name.strip():
             raise ValueError("User name cannot be empty")
         return name.strip()
+
+    def __str__(self) -> str:
+        return (
+            f"User name: {self.name}\n"
+            f"User email: {self.email}\n"
+            f"User address: {self.address}"
+        )
 
     def __eq__(self, other: "User") -> bool:
         if not isinstance(other, User):
