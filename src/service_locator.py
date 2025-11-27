@@ -9,14 +9,22 @@ from src.presentation.presenter import Presenter
 class ServiceLocator:
     def __init__(self):
         # Repositories
-        self.repository: UserRepository = InMemoryRepository()
+        self._repository: UserRepository = InMemoryRepository()
 
         # View
-        self.view = Terminal()
+        self._view = Terminal()
 
         # Presenter
-        self.presenter = Presenter(
-            view=self.view,
-            add_user_use_case=AddUserUseCase(self.repository),
-            list_users_use_case=ListUsersUseCase(self.repository),
+        self._presenter = Presenter(
+            view=self._view,
+            add_user_use_case=AddUserUseCase(self._repository),
+            list_users_use_case=ListUsersUseCase(self._repository),
         )
+
+    @property
+    def view(self):
+        return self._view
+
+    @property
+    def presenter(self):
+        return self._presenter

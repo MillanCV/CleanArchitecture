@@ -16,14 +16,6 @@ class Presenter:
         self.add_user_use_case = add_user_use_case
         self.list_user_use_case = list_users_use_case
 
-    # Show user
-    def show_user(self, user: User):
-        self.view.show("=" * 50)
-        self.view.show("")
-        self.view.show(user)
-        self.view.show("")
-        self.view.show("=" * 50)
-
     def add_user(self):
         self.view.show("=" * 50)
         self.view.show("Adding a new user")
@@ -50,18 +42,9 @@ class Presenter:
         try:
             user = self.add_user_use_case.execute(user_data=userData)
         except ValueError as e:
-            self.view.show("")
-            self.view.show("=" * 50)
-            self.view.show("Something went wrong")
-            self.view.show(f"Error: {e}")
-            self.view.show("=" * 50)
-            self.view.show("")
+            self.show_error(str(e))
         else:
-            self.view.show("")
-            self.view.show("=" * 50)
-            self.view.show("User added successfully")
-            self.view.show("=" * 50)
-            self.view.show("")
+            self.show_success_message("User added successfully")
             self.show_user(user)
             self.view.show("")
 
@@ -69,29 +52,24 @@ class Presenter:
         try:
             users = self.list_user_use_case.execute()
         except ValueError as e:
-            self.view.show("")
-            self.view.show("=" * 50)
-            self.view.show("Something went wrong")
-            self.view.show(f"Error: {e}")
-            self.view.show("=" * 50)
-            self.view.show("")
+            self.show_error(str(e))
         else:
             if len(users) == 0:
-                self.view.show("")
-                self.view.show("=" * 50)
-                self.view.show("No users found")
-                self.view.show("=" * 50)
-                self.view.show("")
+                self.show_message_with_separators("No users found")
                 return
 
-            self.view.show("")
-            self.view.show("=" * 50)
-            self.view.show("Listing users")
-            self.view.show("=" * 50)
-            self.view.show("")
+            self.show_message_with_separators("Listing users")
             for user in users:
                 self.show_user(user)
                 self.view.show("")
+
+    # Show user
+    def show_user(self, user: User):
+        self.view.show("=" * 50)
+        self.view.show("")
+        self.view.show(user)
+        self.view.show("")
+        self.view.show("=" * 50)
 
     def show_welcome(self):
         self.view.show("")
@@ -122,27 +100,27 @@ class Presenter:
         self.view.show("")
 
     def show_invalid_option(self):
+        message = "Invalid option. Please select 1, 2, or 3."
+        self.show_message_with_separators(message)
+
+    def show_error(self, error_message: str):
         self.view.show("")
         self.view.show("=" * 50)
-        self.view.show("Invalid option. Please select 1, 2, or 3.")
+        self.view.show("Something went wrong")
+        self.view.show(f"Error: {error_message}")
         self.view.show("=" * 50)
         self.view.show("")
 
-    def run(self) -> None:
-        self.show_welcome()
+    def show_success_message(self, message: str):
+        self.view.show("")
+        self.view.show("=" * 50)
+        self.view.show(message)
+        self.view.show("=" * 50)
+        self.view.show("")
 
-        while True:
-            self.show_menu()
-
-            choice = self.get_menu_choice()
-            self.view.show("")
-
-            if choice == "1":
-                self.add_user()
-            elif choice == "2":
-                self.list_users()
-            elif choice == "3":
-                self.show_goodbye()
-                break
-            else:
-                self.show_invalid_option()
+    def show_message_with_separators(self, message: str) -> None:
+        self.view.show("")
+        self.view.show("=" * 50)
+        self.view.show(message)
+        self.view.show("=" * 50)
+        self.view.show("")
